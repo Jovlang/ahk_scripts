@@ -16,14 +16,20 @@ HandleMiddlePaste() {
     exe := ""
     try exe := WinGetProcessName("ahk_id " hwnd)
 
-    if (exe = "alacritty.exe")
-        return false
+    if (exe = "alacritty.exe" || exe = "WindowsTerminal.exe") {
+        if !WinActive("ahk_id " hwnd) {
+            WinActivate("ahk_id " hwnd)
+            WinWaitActive("ahk_id " hwnd, , 0.15)
+            Sleep 10
+        }
+        SendEvent "^+v"
+        return true
+    }
 
     isIBeam := (A_Cursor = "IBeam")
-    isTerminal := (exe = "WindowsTerminal.exe")
     isExplorer := (exe = "explorer.exe")
 
-    if !(isIBeam || isTerminal || isExplorer)
+    if !(isIBeam || isExplorer)
         return false
 
     if !WinActive("ahk_id " hwnd) {
