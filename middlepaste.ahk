@@ -16,6 +16,9 @@ HandleMiddlePaste() {
     exe := ""
     try exe := WinGetProcessName("ahk_id " hwnd)
 
+    if (exe = "alacritty.exe")
+        return false
+
     isIBeam := (A_Cursor = "IBeam")
     isTerminal := (exe = "WindowsTerminal.exe")
     isExplorer := (exe = "explorer.exe")
