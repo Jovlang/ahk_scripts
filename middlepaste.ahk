@@ -16,7 +16,7 @@ HandleMiddlePaste() {
     exe := ""
     try exe := WinGetProcessName("ahk_id " hwnd)
 
-    if (exe = "alacritty.exe" || exe = "WindowsTerminal.exe") {
+    if (exe = "alacritty.exe" || exe = "WindowsTerminal.exe" || exe = "wezterm-gui.exe") {
         if !WinActive("ahk_id " hwnd) {
             WinActivate("ahk_id " hwnd)
             WinWaitActive("ahk_id " hwnd, , 0.15)
